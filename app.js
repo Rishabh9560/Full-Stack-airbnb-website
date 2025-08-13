@@ -198,6 +198,10 @@ app.delete("/listings/:id/reviews/:reviewId" ,isLoggedIn,isReviewAuthor,(reviewC
 
 
 // });
+app.get("/", (req, res) => {
+    res.redirect("/listings"); 
+
+});
  
 app.listen(port, () => {
     console.log(`app listening to port ${port}`);
