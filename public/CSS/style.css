@@ -51,7 +51,7 @@
  }
 
  /*CARDS*/
-.card{
+.listing-card{
     border:none !important ;
     margin-bottom : 2rem ;
 
@@ -103,3 +103,6 @@
    padding-left: 0;
    padding-right: 0;
 }
+
+/* --- MAP ---*/
+#map { height:400px ; width:80vh }

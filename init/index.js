@@ -14,6 +14,7 @@ async function main(){
 }
 const initDB = async () => {
     await Listing.deleteMany({}) ;
+    initData.data = initData.data.map((obj) =>  ({...obj , owner : "688f84cca2312dffc00b1258"})) ; //this line is use to add owner to listings .. ye line database mai oner add karne kee kaam aati hai
     await Listing.insertMany(initData.data)
     console.log("Data was intialized");
 };
