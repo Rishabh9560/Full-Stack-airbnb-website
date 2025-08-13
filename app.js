@@ -2,7 +2,7 @@ if(process.env.NODE_ENV != "production"){
     require('dotenv').config() ;
 }
 const express = require("express") ;
-const port = 8080 ; 
+const port = process.env.PORT || 8080;
 const mongoose = require("mongoose");
 const app = express() ;
 const Listing = require("./models/listing.js");
@@ -24,8 +24,8 @@ const userRouter = require("./Routes/user.js");
 const { isLoggedIn, isReviewAuthor } = require("./middleware.js");
 const reviewController = require("./controllers/reviews.js");
 
-
-const dbUrl = process.env.ATLASDB_URL ;
+// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const dbUrl = process.env.ATLASDB_URL;
 main()
 .then(() =>{
     console.log("Connected to DB") ;
@@ -58,10 +58,11 @@ const store = MongoStore.create({
 });
 store.on("error" , ()=>{
     console.log("Error in Mongo Session Store" ,err)
-})
+});
 const sessionOptions = {
-    store , 
-    secret : process.env.SECRET , 
+    
+    
+    secret :  process.env.SECRET , 
     resave : false , 
     saveUninitalized : true ,
     cookie : {
@@ -198,6 +199,6 @@ app.delete("/listings/:id/reviews/:reviewId" ,isLoggedIn,isReviewAuthor,(reviewC
 
 // });
  
-app.listen((port) ,() =>{
-    console.log("app listening to port 8080");
-})
+app.listen(port, () => {
+    console.log(`app listening to port ${port}`);
+});
