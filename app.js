@@ -18,7 +18,7 @@ const  session = require("express-session") ;
 const MongoStore = require("connect-mongo");
 const flash = require("connect-flash") ;
 const passport = require("passport") ;
-const localStrategy = require("passport-local") ; 
+const localStrategy = require("passport-local") ; node init/index.js
 const User =  require("./models/user.js");
 const userRouter = require("./Routes/user.js");
 const { isLoggedIn, isReviewAuthor } = require("./middleware.js");
@@ -60,11 +60,10 @@ store.on("error" , ()=>{
     console.log("Error in Mongo Session Store" ,err)
 });
 const sessionOptions = {
-    
-    
+    store,
     secret :  process.env.SECRET , 
     resave : false , 
-    saveUninitalized : true ,
+    saveUninitialized : true ,
     cookie : {
         expires : Date.now() + 7 * 24 * 60 * 60 * 1000,
         maxAge : 7*24*60*60*1000 ,
